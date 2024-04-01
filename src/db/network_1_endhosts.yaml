@@ -1,0 +1,63 @@
+- host_type: wireless access point
+  hostname: ap-1
+  interfaces:
+  - aggregate_members: null
+    interface_mode: access
+    interface_type: physical
+    ipv4_address: null
+    ipv6_address: null
+    name: eth0
+    parent: ap-1
+    sub_interfaces: []
+    vlans: []
+  - aggregate_members: null
+    interface_mode: access
+    interface_type: physical
+    ipv4_address: null
+    ipv6_address: null
+    name: eth1
+    parent: ap-1
+    sub_interfaces: []
+    vlans: []
+- host_type: server
+  hostname: server-1
+  interfaces:
+  - aggregate_members: null
+    interface_mode: access
+    interface_type: physical
+    ipv4_address: null
+    ipv6_address: null
+    name: eth0
+    parent: server-1
+    sub_interfaces: []
+    vlans: []
+  - aggregate_members: null
+    interface_mode: access
+    interface_type: physical
+    ipv4_address: null
+    ipv6_address: null
+    name: eth1
+    parent: server-1
+    sub_interfaces: []
+    vlans: []
+- host_type: server
+  hostname: server-2
+  interfaces:
+  - aggregate_members: null
+    interface_mode: access
+    interface_type: physical
+    ipv4_address: null
+    ipv6_address: null
+    name: eth0
+    parent: server-2
+    sub_interfaces: []
+    vlans: []
+  - aggregate_members: null
+    interface_mode: access
+    interface_type: physical
+    ipv4_address: null
+    ipv6_address: null
+    name: eth1
+    parent: server-2
+    sub_interfaces: []
+    vlans: []
