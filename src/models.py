@@ -219,6 +219,16 @@ class NetworkGraph:
         nx.draw_networkx_edges(self.graph, pos, arrowstyle="<|-", style="dashed")
         plt.show()
 
+    def display_graph_test(self):
+        """
+        Draw the entire graph on screen.
+        """
+        pos = nx.circular_layout(self.graph)
+        nx.draw_kamada_kawai(self.graph, )
+        nx.draw_networkx_edges(self.graph, pos, arrowstyle="<|-", style="dashed",width=0.5)
+        plt.show()
+
+
     def display_sub_graph(self, nodes: List[str]):
         """
         Draw a portion of the graph on screen.

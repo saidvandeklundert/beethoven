@@ -1,4 +1,18 @@
-# network to network connections
+# fabric network to network connections
+- ["spine-1", 0, "leaf-1", 0 ]
+- ["spine-1", 1, "leaf-2", 0 ]
+- ["spine-1", 2, "leaf-3", 0 ]
+
+- ["spine-2", 0, "leaf-1", 1 ]
+- ["spine-2", 1, "leaf-2", 1 ]
+- ["spine-2", 2, "leaf-3", 1 ]
+
+- ["leaf-1", 0, "switch-3", 4 ]
+- ["leaf-1", 0, "switch-4", 4 ]
+- ["leaf-2", 0, "switch-3", 5 ]
+- ["leaf-2", 0, "switch-4", 5 ]
+
+# switched network to network connections
 - ["switch-4", 0, "switch-3", 0 ]
 - ["switch-4", 1, "switch-3", 1 ]
 

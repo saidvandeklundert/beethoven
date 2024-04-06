@@ -1,21 +1,134 @@
+#       spine1  spine2
+# 
+#     leaf1   leaf2   leaf3
+#
+#   sw3     sw4
+#
+#   sw1     sw2
+#
+#   srv1    ap1
+
+- hostname: spine-1
+  interfaces:  
+  - interface_mode: routed
+    interface_type: physical
+    name: ge-0/0/0
+    ipv4_address: "1.1.1.1/30"
+    parent: spine-1
+  - interface_mode: routed
+    interface_type: physical
+    name: ge-0/0/1
+    ipv4_address: "1.1.1.5/30"
+    parent: spine-1
+  - interface_mode: routed
+    interface_type: physical
+    name: ge-0/0/2
+    ipv4_address: "1.1.1.9/30"
+    parent: spine-1
+  - interface_mode: routed
+    interface_type: physical
+    name: ge-0/0/3
+    parent: spine-1
+  os: JUNOS
+  vendor: juniper
+
+- hostname: spine-2
+  interfaces:
+  - interface_mode: routed
+    interface_type: physical
+    name: ge-0/0/0
+    parent: spine-2
+  - interface_mode: routed
+    interface_type: physical
+    name: ge-0/0/1
+    parent: spine-2
+  - interface_mode: routed
+    interface_type: physical
+    name: ge-0/0/2
+    parent: spine-2
+  - interface_mode: routed
+    interface_type: physical
+    name: ge-0/0/3
+    parent: spine-2
+  os: JUNOS
+  vendor: juniper  
+
+- hostname: leaf-1
+  interfaces:
+  - interface_mode: routed
+    interface_type: physical
+    name: ge-0/0/0
+    parent: leaf-1
+  - interface_mode: routed
+    interface_type: physical
+    name: ge-0/0/1
+    parent: leaf-1
+  - interface_mode: routed
+    interface_type: physical
+    name: ge-0/0/2
+    parent: leaf-1
+  - interface_mode: routed
+    interface_type: physical
+    name: ge-0/0/3
+    parent: leaf-1
+  os: JUNOS
+  vendor: juniper
+
+- hostname: leaf-2
+  interfaces:
+  - interface_mode: routed
+    interface_type: physical
+    name: ge-0/0/0
+    parent: leaf-2
+  - interface_mode: routed
+    interface_type: physical
+    name: ge-0/0/1
+    parent: leaf-2
+  - interface_mode: routed
+    interface_type: physical
+    name: ge-0/0/2
+    parent: leaf-2
+  - interface_mode: routed
+    interface_type: physical
+    name: ge-0/0/3
+    parent: leaf-2
+  os: JUNOS
+  vendor: juniper
+
+- hostname: leaf-3
+  interfaces:
+  - interface_mode: routed
+    interface_type: physical
+    name: ge-0/0/0
+    parent: leaf-3
+  - interface_mode: routed
+    interface_type: physical
+    name: ge-0/0/1
+    parent: leaf-3
+  - interface_mode: routed
+    interface_type: physical
+    name: ge-0/0/2
+    parent: leaf-3
+  - interface_mode: routed
+    interface_type: physical
+    name: ge-0/0/3
+    parent: leaf-3
+  os: JUNOS
+  vendor: juniper
+
 - hostname: switch-1
   interfaces:
   - aggregate_members: null
     interface_mode: access
     interface_type: physical
-    ipv4_address: null
-    ipv6_address: null
     name: GigabitEthernet0/0/1
     parent: switch-1
-    sub_interfaces: []
     vlans:
     - name: null
       tag: 10
   - aggregate_members: null
     interface_mode: access
     interface_type: physical
-    ipv4_address: null
-    ipv6_address: null
     name: GigabitEthernet0/0/2
     parent: switch-1
     sub_interfaces: []
@@ -25,8 +138,6 @@
   - aggregate_members: null
     interface_mode: trunk
     interface_type: physical
-    ipv4_address: null
-    ipv6_address: null
     name: GigabitEthernet0/0/3
     parent: switch-1
     sub_interfaces: []
@@ -42,8 +153,6 @@
   - aggregate_members: null
     interface_mode: trunk
     interface_type: physical
-    ipv4_address: null
-    ipv6_address: null
     name: GigabitEthernet0/0/4
     parent: switch-1
     sub_interfaces: []
@@ -57,8 +166,6 @@
   - aggregate_members: null
     interface_mode: access
     interface_type: physical
-    ipv4_address: null
-    ipv6_address: null
     name: GigabitEthernet0/0/1
     parent: switch-2
     sub_interfaces: []
@@ -68,8 +175,6 @@
   - aggregate_members: null
     interface_mode: access
     interface_type: physical
-    ipv4_address: null
-    ipv6_address: null
     name: GigabitEthernet0/0/2
     parent: switch-2
     sub_interfaces: []
@@ -79,8 +184,6 @@
   - aggregate_members: null
     interface_mode: trunk
     interface_type: physical
-    ipv4_address: null
-    ipv6_address: null
     name: GigabitEthernet0/0/3
     parent: switch-2
     sub_interfaces: []
@@ -96,8 +199,6 @@
   - aggregate_members: null
     interface_mode: trunk
     interface_type: physical
-    ipv4_address: null
-    ipv6_address: null
     name: GigabitEthernet0/0/4
     parent: switch-2
     sub_interfaces: []
@@ -106,13 +207,27 @@
       tag: 20
   os: IOSXE
   vendor: cisco  
+#
 - hostname: switch-3
   interfaces:
   - aggregate_members: null
     interface_mode: trunk
     interface_type: physical
-    ipv4_address: null
-    ipv6_address: null
+    name: GigabitEthernet0/0/0
+    parent: switch-3
+    sub_interfaces: []
+    vlans:
+    - name: null
+      tag: 10
+    - name: null
+      tag: 20
+    - name: null
+      tag: 30
+    - name: null
+      tag: 40  
+  - aggregate_members: null
+    interface_mode: trunk
+    interface_type: physical
     name: GigabitEthernet0/0/1
     parent: switch-3
     sub_interfaces: []
@@ -128,8 +243,6 @@
   - aggregate_members: null
     interface_mode: trunk
     interface_type: physical
-    ipv4_address: null
-    ipv6_address: null
     name: GigabitEthernet0/0/2
     parent: switch-3
     sub_interfaces: []
@@ -145,8 +258,6 @@
   - aggregate_members: null
     interface_mode: trunk
     interface_type: physical
-    ipv4_address: null
-    ipv6_address: null
     name: GigabitEthernet0/0/3
     parent: switch-3
     sub_interfaces: []
@@ -159,30 +270,41 @@
       tag: 30
     - name: null
       tag: 40
-  - aggregate_members: null
-    interface_mode: trunk
+  - interface_mode: routed
     interface_type: physical
-    ipv4_address: null
-    ipv6_address: null
     name: GigabitEthernet0/0/4
     parent: switch-3
-    sub_interfaces: []
-    vlans:
-    - name: null
-      tag: 10
-    - name: null
-      tag: 20
-    - name: null
-      tag: 30
-    - name: null
-      tag: 40
+  - interface_mode: routed
+    interface_type: physical
+    name: GigabitEthernet0/0/5
+    parent: switch-3
+  - interface_mode: routed
+    interface_type: physical
+    name: GigabitEthernet0/0/6
+    parent: switch-3
   os: IOSXE
   vendor: cisco
+#
 - hostname: switch-4
   interfaces:
   - aggregate_members: null
     interface_mode: trunk
     interface_type: physical
+    name: GigabitEthernet0/0/0
+    parent: switch-4
+    sub_interfaces: []
+    vlans:
+    - name: null
+      tag: 10
+    - name: null
+      tag: 20
+    - name: null
+      tag: 30
+    - name: null
+      tag: 40
+  - aggregate_members: null
+    interface_mode: trunk
+    interface_type: physical
     ipv4_address: null
     ipv6_address: null
     name: GigabitEthernet0/0/1
@@ -217,11 +339,8 @@
   - aggregate_members: null
     interface_mode: trunk
     interface_type: physical
-    ipv4_address: null
-    ipv6_address: null
     name: GigabitEthernet0/0/3
     parent: switch-4
-    sub_interfaces: []
     vlans:
     - name: null
       tag: 10
@@ -231,22 +350,17 @@
       tag: 30
     - name: null
       tag: 40
-  - aggregate_members: null
-    interface_mode: trunk
+  - interface_mode: routed
     interface_type: physical
-    ipv4_address: null
-    ipv6_address: null
     name: GigabitEthernet0/0/4
     parent: switch-4
-    sub_interfaces: []
-    vlans:
-    - name: null
-      tag: 10
-    - name: null
-      tag: 20
-    - name: null
-      tag: 30
-    - name: null
-      tag: 40
+  - interface_mode: routed
+    interface_type: physical
+    name: GigabitEthernet0/0/5
+    parent: switch-4
+  - interface_mode: routed
+    interface_type: physical
+    name: GigabitEthernet0/0/6
+    parent: switch-4
   os: IOSXE
   vendor: cisco

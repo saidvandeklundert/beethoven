@@ -22,11 +22,10 @@ for endhost in endhost_data:
 
 
 ng = NetworkGraph(network=network_model)
-ng.display_network_nodes()
+#ng.display_network_nodes()
 ng.display_nodes()
-ng.display_graph()
+#ng.display_graph()
 ng.display_links()
-ng.display_sub_graph(["switch-3", "switch-4"])
-
-
-ng.display_links("switch-2")
+#ng.display_sub_graph(["switch-3", "switch-4"])
+#ng.display_links("switch-2")
+#ng.display_sub_graph(["spine-1", "spine-2", "leaf-1", "leaf-2", "leaf-3"])
