@@ -1,6 +1,6 @@
 from __future__ import annotations
 from enum import Enum
-from pydantic import BaseModel
+from pydantic import BaseModel, Field
 import uuid
 from uuid import UUID
 from typing import List, Optional, Union, Dict
@@ -68,10 +68,20 @@ class Interface(BaseModel):
     def __str__(self) -> str:
         return f"{self.name}"
 
+class Role(Enum):
+    """
+    The role of the device
+    """
+
+    SPINE = "spine"
+    LEAF = "leaf"
+    ACCESS_SWITCH = "acc-sw"
+    DISTRIBUTION_SWITCH = "dis-sw"
+
 
 class Vendor(Enum):
     """
-    Vendor
+    The Network vendor.
     """
 
     CISCO = "cisco"
@@ -81,6 +91,9 @@ class Vendor(Enum):
 
 
 class NetworkOs(Enum):
+    """
+    The network OS in use.
+    """
     IOS = "IOS"
     IOSXE = "IOSXE"
     IOSXR = "IOSXR"
@@ -96,8 +109,10 @@ class NetworkNode(BaseModel, use_enum_values=True):
 
     hostname: str
     vendor: Vendor = Vendor.CISCO
+    role: Role
     os: NetworkOs = NetworkOs.IOSXE
     interfaces: List[Interface]
+
 
     def __hash__(self):
         return hash(self.hostname)
@@ -111,6 +126,7 @@ class NetworkNode(BaseModel, use_enum_values=True):
     def __getitem__(self, interface_idx: int):
         return self.interfaces[interface_idx]
 
+    
 
 class EndhostType(Enum):
     WIRELESS_AP = "wireless access point"
@@ -148,6 +164,9 @@ class Endhosts(BaseModel, use_enum_values=True):
     def __iter__(self):
         return iter(self.nodes)
 
+class ConfigData(BaseModel):
+    syslog_servers:List[ipaddress.IPv4Address] 
+    dns_servers:List[ipaddress.IPv4Address] 
 
 class Network(BaseModel, use_enum_values=True):
     """
@@ -156,6 +175,7 @@ class Network(BaseModel, use_enum_values=True):
 
     nodes: Dict[str, Union[NetworkNode, Endhost]]
     connections: List
+    config_data : ConfigData
 
     def __iter__(self):
         return iter(self.nodes.items())
@@ -197,7 +217,7 @@ class NetworkGraph:
 
     def display_network_nodes(self):
         """
-        Print all the nodes in a given network.
+        Print all the Network nodes in the network.
         """
         for node in list(self.graph.nodes):
             if isinstance(node, NetworkNode):
@@ -205,7 +225,7 @@ class NetworkGraph:
 
     def display_nodes(self):
         """
-        Print all the nodes in a given network.
+        Print all the nodes in the network.
         """
         for node in list(self.graph.nodes):
             print(node)
@@ -302,3 +322,4 @@ class NetworkGraph:
         Run validations on the graph that was just build.
         """
         self.validate_links()
+

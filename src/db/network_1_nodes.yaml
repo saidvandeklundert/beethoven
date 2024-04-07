@@ -9,6 +9,7 @@
 #   srv1    ap1
 
 - hostname: spine-1
+  role: "spine"
   interfaces:  
   - interface_mode: routed
     interface_type: physical
@@ -33,6 +34,7 @@
   vendor: juniper
 
 - hostname: spine-2
+  role: "spine"
   interfaces:
   - interface_mode: routed
     interface_type: physical
@@ -54,6 +56,7 @@
   vendor: juniper  
 
 - hostname: leaf-1
+  role: "leaf"
   interfaces:
   - interface_mode: routed
     interface_type: physical
@@ -75,6 +78,7 @@
   vendor: juniper
 
 - hostname: leaf-2
+  role: "leaf"
   interfaces:
   - interface_mode: routed
     interface_type: physical
@@ -96,6 +100,7 @@
   vendor: juniper
 
 - hostname: leaf-3
+  role: "leaf"
   interfaces:
   - interface_mode: routed
     interface_type: physical
@@ -117,6 +122,7 @@
   vendor: juniper
 
 - hostname: switch-1
+  role: "acc-sw"
   interfaces:
   - aggregate_members: null
     interface_mode: access
@@ -162,6 +168,7 @@
   os: IOSXE
   vendor: cisco
 - hostname: switch-2
+  role: "acc-sw"
   interfaces:
   - aggregate_members: null
     interface_mode: access
@@ -209,6 +216,7 @@
   vendor: cisco  
 #
 - hostname: switch-3
+  role: "dis-sw"
   interfaces:
   - aggregate_members: null
     interface_mode: trunk
@@ -286,6 +294,7 @@
   vendor: cisco
 #
 - hostname: switch-4
+  role: "dis-sw"
   interfaces:
   - aggregate_members: null
     interface_mode: trunk

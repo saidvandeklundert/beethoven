@@ -1,0 +1,7 @@
+# data for the network, for graph and config gen purposes.
+syslog_servers:
+  - "192.168.200.11"
+  - "192.168.200.12"
+dns_servers:
+  - "8.8.8.8"
+  - "1.1.1.1"

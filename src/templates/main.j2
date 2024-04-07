@@ -1,0 +1,14 @@
+# ---
+# template cofiguration for {{ node.hostname }}
+# ---
+hostname {{ node.hostname }}
+role {{ node.role }}
+
+
+{%if node.role == "leaf" %}
+{% endif %}
+
+
+{% for interface in node.interfaces %}
+interface {{ interface.name }}
+{% endfor %}
