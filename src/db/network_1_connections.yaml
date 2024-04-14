@@ -28,4 +28,5 @@
 - ["server-1", 0, "switch-1", 0 ]
 - ["server-2", 0, "switch-2", 0 ]
 - ["ap-1", 0, "switch-1", 1 ]
-
+- ["server-3", 0, "leaf-2", 4 ]
+- ["server-4", 0, "leaf-3", 4 ]

@@ -30,6 +30,7 @@ class InterfaceMode(Enum):
     ACCESS = "access"
     TRUNK = "trunk"
     ROUTED = "routed"
+    LOOPBACK = "loopback"
 
 
 class InterfaceType(Enum):
@@ -68,6 +69,7 @@ class Interface(BaseModel):
     def __str__(self) -> str:
         return f"{self.name}"
 
+
 class Role(Enum):
     """
     The role of the device
@@ -94,6 +96,7 @@ class NetworkOs(Enum):
     """
     The network OS in use.
     """
+
     IOS = "IOS"
     IOSXE = "IOSXE"
     IOSXR = "IOSXR"
@@ -112,8 +115,7 @@ class NetworkNode(BaseModel, use_enum_values=True):
     role: Role
     os: NetworkOs = NetworkOs.IOSXE
     interfaces: List[Interface]
-
-
+    router_id: Optional[ipaddress.IPv4Interface] = None
     def __hash__(self):
         return hash(self.hostname)
 
@@ -126,7 +128,6 @@ class NetworkNode(BaseModel, use_enum_values=True):
     def __getitem__(self, interface_idx: int):
         return self.interfaces[interface_idx]
 
-    
 
 class EndhostType(Enum):
     WIRELESS_AP = "wireless access point"
@@ -164,9 +165,11 @@ class Endhosts(BaseModel, use_enum_values=True):
     def __iter__(self):
         return iter(self.nodes)
 
+
 class ConfigData(BaseModel):
-    syslog_servers:List[ipaddress.IPv4Address] 
-    dns_servers:List[ipaddress.IPv4Address] 
+    syslog_servers: List[ipaddress.IPv4Address]
+    dns_servers: List[ipaddress.IPv4Address]
+
 
 class Network(BaseModel, use_enum_values=True):
     """
@@ -175,7 +178,7 @@ class Network(BaseModel, use_enum_values=True):
 
     nodes: Dict[str, Union[NetworkNode, Endhost]]
     connections: List
-    config_data : ConfigData
+    config_data: ConfigData
 
     def __iter__(self):
         return iter(self.nodes.items())
@@ -230,26 +233,31 @@ class NetworkGraph:
         for node in list(self.graph.nodes):
             print(node)
 
-    def display_graph(self):
+    def display_graph(self, show: bool = False):
         """
         Draw the entire graph on screen.
         """
         pos = nx.circular_layout(self.graph)
         nx.draw(self.graph, pos, with_labels=True)
         nx.draw_networkx_edges(self.graph, pos, arrowstyle="<|-", style="dashed")
-        plt.show()
+        plt.savefig("output/drawing/network.pdf")
+        if show is True:
+            plt.show()
 
     def display_graph_test(self):
         """
         Draw the entire graph on screen.
         """
         pos = nx.circular_layout(self.graph)
-        nx.draw_kamada_kawai(self.graph, )
-        nx.draw_networkx_edges(self.graph, pos, arrowstyle="<|-", style="dashed",width=0.5)
+        nx.draw_kamada_kawai(
+            self.graph,
+        )
+        nx.draw_networkx_edges(
+            self.graph, pos, arrowstyle="<|-", style="dashed", width=0.5
+        )
         plt.show()
 
-
-    def display_sub_graph(self, nodes: List[str]):
+    def display_sub_graph(self, nodes: List[str], show: bool = False):
         """
         Draw a portion of the graph on screen.
         """
@@ -262,7 +270,12 @@ class NetworkGraph:
         pos = nx.circular_layout(sub_graph)
         nx.draw(sub_graph, pos, with_labels=True)
         nx.draw_networkx_edges(sub_graph, pos, arrowstyle="<|-", style="dashed")
-        plt.show()
+        nx.spring_layout(sub_graph, k=0.15, iterations=20)
+        plt.savefig("output/drawing/sub_graph.pdf")
+        print(relevant_items)
+        print(sub_graph)
+        if show is True:
+            plt.show()
 
     def display_links(self, node_name: Optional[str] = None):
         """
@@ -322,4 +335,3 @@ class NetworkGraph:
         Run validations on the graph that was just build.
         """
         self.validate_links()
-
